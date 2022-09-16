@@ -43,7 +43,15 @@ namespace DoloniToys.Infrastructure.Data
                     var user = new User
                     {
                         Id = Guid.NewGuid(),
-                        UserName = "User",
+                        UserName = "UserName",
+                        Name = "Name",
+                        Surname = "Surname",
+                        Fax = "",
+                        Company = "",
+                        Address = "Address",
+                        City = "City",
+                        Country = "Country",
+                        Region = "Region",
                         EmailConfirmed = true,
                         Email = "user@gmail.com",
                         PhoneNumber = "1234567890",

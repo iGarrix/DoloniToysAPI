@@ -35,9 +35,9 @@ namespace DoloniToys.Application.Services.Identity
             _devManager = devManager;
         }
 
-        public async Task<UserDto> GetAuthorizeAsync(string username)
+        public async Task<UserDto> GetAuthorizeAsync(string email)
         {
-            User findAuthorize = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
+            User findAuthorize = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(email);
             if (findAuthorize is null)
             {
                 throw new NotFoundHandler();

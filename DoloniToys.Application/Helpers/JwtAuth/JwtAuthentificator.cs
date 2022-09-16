@@ -32,7 +32,7 @@ namespace DoloniToys.Application.Helpers.JwtAuth
             {
                 List<Claim> claims = new List<Claim>()
                 {
-                    new Claim("username", user.UserName),
+                    new Claim("email", user.Email),
                 };
 
                 JwtSecurityToken jwtprivate = this.GenerateSecurityToken(claims);
