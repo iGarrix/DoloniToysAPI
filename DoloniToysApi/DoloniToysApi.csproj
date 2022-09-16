@@ -35,8 +35,4 @@
     <ProjectReference Include="..\DoloniToys.Domain\DoloniToys.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

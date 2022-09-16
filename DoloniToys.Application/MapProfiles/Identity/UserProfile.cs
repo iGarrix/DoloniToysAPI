@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DoloniToys.Application.MapProfiles.Identity
 {
-    public class DevUserProfile : Profile
+    public class UserProfile : Profile
     {
-        public DevUserProfile()
+        public UserProfile()
         {
             CreateMap<User, UserDto>()
                 .ForMember(dest => dest.Email, source => source.MapFrom(src => src.Email))
