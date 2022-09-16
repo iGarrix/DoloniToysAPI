@@ -11,7 +11,7 @@ namespace DoloniToys.Domain.Interfaces.Services
 {
     public interface IAccountService
     {
-        Task<DevUserDto> GetAuthorizeAsync(string username);
+        Task<UserDto> GetAuthorizeAsync(string username);
         Task<AuthorizateResponse> LogInAsync(LogInRequest logInRequest);
         Task<AuthorizateResponse> RefreshTokenAsync(RefreshAuthorizateRequest refreshAuthorizateRequest);
     }

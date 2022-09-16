@@ -41,7 +41,7 @@ namespace DoloniToys.Application.Helpers.JwtAuth
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtprivate),
                     RefreshToken = refreshToken,
-                    Profile = user.ToDto<User, DevUserDto>(_mapper),
+                    Profile = user.ToDto<User, UserDto>(_mapper),
                 };
             }
             return null;

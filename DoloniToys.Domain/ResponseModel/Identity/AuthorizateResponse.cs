@@ -11,6 +11,6 @@ namespace DoloniToys.Domain.ResponseModel.Identity
     {
         public string RefreshToken { get; set; }
         public string AccessToken { get; set; }
-        public DevUserDto Profile { get; set; }
+        public UserDto Profile { get; set; }
     }
 }

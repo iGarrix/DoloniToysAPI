@@ -35,14 +35,14 @@ namespace DoloniToys.Application.Services.Identity
             _devManager = devManager;
         }
 
-        public async Task<DevUserDto> GetAuthorizeAsync(string username)
+        public async Task<UserDto> GetAuthorizeAsync(string username)
         {
             User findAuthorize = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
             if (findAuthorize is null)
             {
                 throw new NotFoundHandler();
             }
-            return findAuthorize.ToDto<User, DevUserDto>(_mapper);
+            return findAuthorize.ToDto<User, UserDto>(_mapper);
         }
 
         public async Task<AuthorizateResponse> LogInAsync(LogInRequest logInRequest)
