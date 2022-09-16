@@ -11,7 +11,7 @@ namespace DoloniToys.Application.Helpers.JwtAuth
 {
     public interface IJwtAuthentificator
     {
-        AuthorizateResponse CreateToken(DevUser user);
+        AuthorizateResponse CreateToken(User user);
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
     }

@@ -10,7 +10,7 @@ namespace DoloniToys.Domain.Interfaces.Repositories
 {
     public interface IAccountRepository
     {
-        Task<DevUser> GetAuthorizedAsync(string email);
-        Task<IdentityResult> UpdateDevUserAsync(DevUser updator);
+        Task<User> GetAuthorizedAsync(string email);
+        Task<IdentityResult> UpdateDevUserAsync(User updator);
     }
 }

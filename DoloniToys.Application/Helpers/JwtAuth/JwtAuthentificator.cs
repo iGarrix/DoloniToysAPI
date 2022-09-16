@@ -26,7 +26,7 @@ namespace DoloniToys.Application.Helpers.JwtAuth
             _mapper = mapper;
             _configuration = configuration;
         }
-        public AuthorizateResponse CreateToken(DevUser user)
+        public AuthorizateResponse CreateToken(User user)
         {
             if (user is not null)
             {
@@ -41,7 +41,7 @@ namespace DoloniToys.Application.Helpers.JwtAuth
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtprivate),
                     RefreshToken = refreshToken,
-                    Profile = user.ToDto<DevUser, DevUserDto>(_mapper),
+                    Profile = user.ToDto<User, DevUserDto>(_mapper),
                 };
             }
             return null;

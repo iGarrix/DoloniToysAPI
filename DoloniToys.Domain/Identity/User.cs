@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoloniToys.Domain.Identity
 {
-    public class DevUser : BaseUser
+    public class User : BaseUser
     {
 
     }

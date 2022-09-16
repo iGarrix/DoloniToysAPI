@@ -24,9 +24,9 @@ namespace DoloniToys.Application.Services.Identity
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly IJwtAuthentificator _jwtAuthentificator;
-        private readonly UserManager<DevUser> _devManager;
+        private readonly UserManager<User> _devManager;
 
-        public AccountService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IConfiguration configuration, IJwtAuthentificator jwtAuthentificator, UserManager<DevUser> devManager)
+        public AccountService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IConfiguration configuration, IJwtAuthentificator jwtAuthentificator, UserManager<User> devManager)
         {
             _repositoryWrapper = repositoryWrapper;
             _mapper = mapper;
@@ -37,17 +37,17 @@ namespace DoloniToys.Application.Services.Identity
 
         public async Task<DevUserDto> GetAuthorizeAsync(string username)
         {
-            DevUser findAuthorize = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
+            User findAuthorize = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
             if (findAuthorize is null)
             {
                 throw new NotFoundHandler();
             }
-            return findAuthorize.ToDto<DevUser, DevUserDto>(_mapper);
+            return findAuthorize.ToDto<User, DevUserDto>(_mapper);
         }
 
         public async Task<AuthorizateResponse> LogInAsync(LogInRequest logInRequest)
         {
-            DevUser logInDev = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(logInRequest.Email);
+            User logInDev = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(logInRequest.Email);
             bool passwordValid = await _devManager.CheckPasswordAsync(logInDev, logInRequest.Password);
             if (passwordValid)
             {
@@ -85,7 +85,7 @@ namespace DoloniToys.Application.Services.Identity
             }
 
             string username = principal.Identities.FirstOrDefault().Claims.FirstOrDefault().Value;
-            DevUser refreshDev = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
+            User refreshDev = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(username);
 
             if (refreshDev is null || refreshDev.RefreshToken != refreshAuthorizateRequest.RefreshToken || refreshDev.RefreshTokenExpiryTime <= DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc))
             {

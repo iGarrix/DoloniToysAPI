@@ -13,7 +13,7 @@ namespace DoloniToys.Application.MapProfiles.Identity
     {
         public DevUserProfile()
         {
-            CreateMap<DevUser, DevUserDto>()
+            CreateMap<User, DevUserDto>()
                 .ForMember(dest => dest.Email, source => source.MapFrom(src => src.Email))
                 .ForMember(dest => dest.PhoneNumber, source => source.MapFrom(src => src.PhoneNumber));
         }
