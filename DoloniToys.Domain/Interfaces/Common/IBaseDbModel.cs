@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoloniToys.Domain.Interfaces.Common
 {
-    public interface BaseDbModel<Type>
+    public interface IBaseDbModel<Type>
     {
         Type Id { get; set; }
         DateTime Create { get; set; }

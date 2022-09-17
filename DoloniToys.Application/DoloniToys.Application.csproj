@@ -34,8 +34,4 @@
     <ProjectReference Include="..\DoloniToys.Infrastructure\DoloniToys.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MapProfiles\Common\" />
-  </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DoloniToys.Infrastructure.Repositories.Common
 {
-    public class BaseRepository<TEntity, TIdType> : IBaseRepository<TEntity, TIdType> where TEntity : class, BaseDbModel<TIdType>
+    public class BaseRepository<TEntity, TIdType> : IBaseRepository<TEntity, TIdType> where TEntity : class, IBaseDbModel<TIdType>
     {
         private readonly DataContext _context;
         public BaseRepository(DataContext context)
