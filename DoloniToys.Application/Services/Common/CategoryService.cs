@@ -50,24 +50,24 @@ namespace DoloniToys.Application.Services.Common
 
         public PaginationResponse<CategoryDto> GetAllCategory(int page = 1, int take = 1)
         {
-            PaginationResponse<CategoryDto> paginateWorks = Pagination.PaginateToDtos<Category, CategoryDto>(new PaginationParams<Category>()
+            PaginationResponse<CategoryDto> paginateCategory = Pagination.PaginateToDtos<Category, CategoryDto>(new PaginationParams<Category>()
             {
                 TData = _repositoryWrapper.CategoryRepository.Items,
                 CurrentPage = page,
                 Take = take,
             }, _mapper);
 
-            if (paginateWorks is null)
+            if (paginateCategory is null)
             {
                 throw new BadHandler();
             }
 
-            if (paginateWorks.Pageables.Count() == 0)
+            if (paginateCategory.Pageables.Count() == 0)
             {
                 throw new NotFoundHandler();
             }
 
-            return paginateWorks;
+            return paginateCategory;
         }
 
         public CategoryDto ChangeCategory(ChangeCategoryRequest request)
