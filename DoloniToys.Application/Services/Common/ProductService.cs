@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoloniToys.Application.Extensions.Expressions;
 using DoloniToys.Application.Extensions.Identity;
 using DoloniToys.Application.Extensions.Pagination;
 using DoloniToys.Application.Helpers.ImageManager;
@@ -10,6 +11,7 @@ using DoloniToys.Domain.Interfaces.Services;
 using DoloniToys.Domain.Models.DbModels;
 using DoloniToys.Domain.RequestModels.ProductRequests;
 using DoloniToys.Domain.Resources;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +97,35 @@ namespace DoloniToys.Application.Services.Common
                 return product.ToDto<Product, ProductDto>(_mapper);
             }
             throw new NotFoundHandler();
+        }
+
+        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "")
+        {
+            Category category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(x => x.Title == categoryTitle);
+            
+            if (category is null)
+            {
+                throw new NotFoundHandler();
+            }
+
+            PaginationResponse<ProductDto> paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
+            {
+                TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).Where(x => x.Category.Title == category.Title).Expression(filterParam),
+                CurrentPage = page,
+                Take = take,
+            }, _mapper);
+
+            if (paginateProduct is null)
+            {
+                throw new BadHandler();
+            }
+
+            if (paginateProduct.Pageables.Count() == 0)
+            {
+                throw new NotFoundHandler();
+            }
+
+            return paginateProduct;
         }
 
         public ProductDto ChangeProduct(ChangeProductRequest request)

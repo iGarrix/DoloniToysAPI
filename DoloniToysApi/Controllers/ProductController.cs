@@ -38,6 +38,12 @@ namespace DoloniToysApi.Controllers
             return _productService.GetProduct(article);
         }
 
+        [HttpGet(ProductPaths.GetFilter)]
+        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, string filterParam, int page = 1, int take = 1)
+        {
+            return _productService.GetProductsByCategory(categoryTitle, page, take, filterParam);
+        }
+
         [HttpPut(ProductPaths.Change)]
         public ProductDto ChangeCategory([FromForm] ChangeProductRequest request)
         {
