@@ -10,5 +10,6 @@ namespace DoloniToys.Domain.Resources
     {
         public const string Root = "Images";
         public const string User = "User";
+        public const string Category = "Category";
     }
 }

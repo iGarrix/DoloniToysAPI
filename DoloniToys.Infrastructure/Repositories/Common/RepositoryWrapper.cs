@@ -11,10 +11,12 @@ namespace DoloniToys.Infrastructure.Repositories.Common
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public RepositoryWrapper(IAccountRepository accountRepository)
+        public RepositoryWrapper(IAccountRepository accountRepository, ICategoryRepository categoryRepository)
         {
             _accountRepository = accountRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public IAccountRepository AccountRepository
@@ -26,6 +28,18 @@ namespace DoloniToys.Infrastructure.Repositories.Common
                     return null;
                 }
                 return _accountRepository;
+            }
+        }
+
+        public ICategoryRepository CategoryRepository
+        {
+            get
+            {
+                if (_categoryRepository is null)
+                {
+                    return null;
+                }
+                return _categoryRepository;
             }
         }
     }

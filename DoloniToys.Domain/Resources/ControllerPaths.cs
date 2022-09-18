@@ -12,4 +12,12 @@ namespace DoloniToys.Domain.Resources
         public const string LogInAuthorize = "LOGIN_AUTHORIZE";
         public const string RefreshTokenAuthorize = "REFRESH_TOKEN_AUTHORIZE";
     }
+
+    public static class CategoryPaths
+    {
+        public const string Add = "ADD_CATEGORY";
+        public const string GetAll = "GET_ALL";
+        public const string Change = "CHANGE_CATEGORY";
+        public const string Remove = "REMOVE_CATEGORY"; 
+    }
 }

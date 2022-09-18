@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoloniToys.Domain.Interfaces.Common
 {
-    public class IBaseDtoModel
+    public interface IBaseDtoModel
     {
         DateTime Create { get; set; }
     }

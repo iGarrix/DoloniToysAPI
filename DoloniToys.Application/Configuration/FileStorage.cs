@@ -13,14 +13,14 @@ namespace DoloniToys.Application.Configuration
         public static void useFileStorage(this WebApplication app)
         {
             var root = Path.Combine(Directory.GetCurrentDirectory(), "Images/");
-            var works = Path.Combine(root, "User");
+            var category = Path.Combine(root, "Category");
             if (!Directory.Exists(root))
             {
                 Directory.CreateDirectory(root);
             }
-            if (!Directory.Exists(works))
+            if (!Directory.Exists(category))
             {
-                Directory.CreateDirectory(works);
+                Directory.CreateDirectory(category);
             }
             app.UseStaticFiles(new StaticFileOptions
             {

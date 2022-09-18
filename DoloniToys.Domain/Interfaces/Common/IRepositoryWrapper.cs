@@ -10,5 +10,6 @@ namespace DoloniToys.Domain.Interfaces.Common
     public interface IRepositoryWrapper
     {
         IAccountRepository AccountRepository { get; }
+        ICategoryRepository CategoryRepository { get; } 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DoloniToys.Application.Helpers.JwtAuth;
+using DoloniToys.Application.Services.Common;
 using DoloniToys.Application.Services.Identity;
 using DoloniToys.Domain.Interfaces.Common;
 using DoloniToys.Domain.Interfaces.Repositories;
@@ -25,12 +26,14 @@ namespace DoloniToys.Application.Configuration
 
             builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             #endregion
 
             #region Service Scopes
 
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             #endregion
 
