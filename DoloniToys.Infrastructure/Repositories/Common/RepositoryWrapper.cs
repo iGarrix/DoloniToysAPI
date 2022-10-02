@@ -13,11 +13,13 @@ namespace DoloniToys.Infrastructure.Repositories.Common
         private readonly IAccountRepository _accountRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
-        public RepositoryWrapper(IAccountRepository accountRepository, ICategoryRepository categoryRepository, IProductRepository productRepository)
+        private readonly IQuestionRepository _questionRepository;
+        public RepositoryWrapper(IAccountRepository accountRepository, ICategoryRepository categoryRepository, IProductRepository productRepository, IQuestionRepository questionRepository)
         {
             _accountRepository = accountRepository;
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
+            _questionRepository = questionRepository;
         }
 
         public IAccountRepository AccountRepository
@@ -53,6 +55,18 @@ namespace DoloniToys.Infrastructure.Repositories.Common
                     return null;
                 }
                 return _productRepository;
+            }
+        }
+
+        public IQuestionRepository QuestionRepository
+        {
+            get
+            {
+                if (_questionRepository is null)
+                {
+                    return null;
+                }
+                return _questionRepository;
             }
         }
     }

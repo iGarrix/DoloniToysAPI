@@ -2,6 +2,7 @@
 using DoloniToys.Domain.Models.DbModels;
 using DoloniToys.Infrastructure.Data.Configures.Categories;
 using DoloniToys.Infrastructure.Data.Configures.Products;
+using DoloniToys.Infrastructure.Data.Configures.Questions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -33,9 +34,11 @@ namespace DoloniToys.Infrastructure.Context
 
             builder.ApplyConfiguration(new CategoryConfig());
             builder.ApplyConfiguration(new ProductConfig());
+            builder.ApplyConfiguration(new QuestionConfig());
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Question> Questions { get; set; }
     }
 }

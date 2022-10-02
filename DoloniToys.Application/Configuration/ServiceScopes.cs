@@ -28,6 +28,7 @@ namespace DoloniToys.Application.Configuration
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             #endregion
 
@@ -36,6 +37,7 @@ namespace DoloniToys.Application.Configuration
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IQuestionService, QuestionService>();
 
             #endregion
 

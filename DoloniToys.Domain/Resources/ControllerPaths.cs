@@ -30,4 +30,10 @@ namespace DoloniToys.Domain.Resources
         public const string Change = "CHANGE_PRODUCT";
         public const string Remove = "REMOVE_PRODUCT";
     }
+
+    public static class QuestionPaths
+    {
+        public const string Add = "ADD_QUESTION";
+        public const string GetAll = "GET_ALL";
+    }
 }

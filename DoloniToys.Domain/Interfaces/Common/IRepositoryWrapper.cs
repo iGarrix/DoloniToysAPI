@@ -12,5 +12,6 @@ namespace DoloniToys.Domain.Interfaces.Common
         IAccountRepository AccountRepository { get; }
         ICategoryRepository CategoryRepository { get; } 
         IProductRepository ProductRepository { get; }
+        IQuestionRepository QuestionRepository { get; }
     }
 }
