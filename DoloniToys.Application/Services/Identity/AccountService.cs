@@ -48,6 +48,11 @@ namespace DoloniToys.Application.Services.Identity
         public async Task<AuthorizateResponse> LogInAsync(LogInRequest logInRequest)
         {
             User logInDev = await _repositoryWrapper.AccountRepository.GetAuthorizedAsync(logInRequest.Email);
+            if (logInDev is null)
+            {
+                throw new NotFoundHandler("Log in was failure");
+            }
+
             bool passwordValid = await _devManager.CheckPasswordAsync(logInDev, logInRequest.Password);
             if (passwordValid)
             {

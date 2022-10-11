@@ -19,7 +19,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPost(QuestionPaths.Add)]
-        public QuestionDto AddQuestion([FromForm] AddQuestionRequest request)
+        public QuestionDto AddQuestion([FromBody] AddQuestionRequest request)
         {
             QuestionDto createdQuestion = _questionService.AddQuestion(request);
             return createdQuestion;

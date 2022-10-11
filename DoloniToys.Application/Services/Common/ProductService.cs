@@ -70,7 +70,7 @@ namespace DoloniToys.Application.Services.Common
         {
             PaginationResponse<ProductDto> paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
             {
-                TData = _repositoryWrapper.ProductRepository.Items,
+                TData = _repositoryWrapper.ProductRepository.Items.OrderByDescending(f => f.Create),
                 CurrentPage = page,
                 Take = take,
             }, _mapper);
@@ -101,20 +101,34 @@ namespace DoloniToys.Application.Services.Common
 
         public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "")
         {
-            Category category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(x => x.Title == categoryTitle);
-            
-            if (category is null)
+
+            PaginationResponse<ProductDto> paginateProduct = default(PaginationResponse<ProductDto>);
+            if (categoryTitle == "*")
             {
-                throw new NotFoundHandler();
+                paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
+                {
+                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).OrderByDescending(f => f.Create).Expression(filterParam),
+                    CurrentPage = page,
+                    Take = take,
+                }, _mapper);
             }
-
-            PaginationResponse<ProductDto> paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
+            else
             {
-                TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).Where(x => x.Category.Title == category.Title).Expression(filterParam),
-                CurrentPage = page,
-                Take = take,
-            }, _mapper);
+                Category category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(x => x.Title == categoryTitle);
+            
+                if (category is null)
+                {
+                    throw new NotFoundHandler();
+                }
 
+                paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
+                {
+                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).Where(x => x.Category.Title == category.Title).OrderByDescending(f => f.Create).Expression(filterParam),
+                    CurrentPage = page,
+                    Take = take,
+                }, _mapper);
+
+            }
             if (paginateProduct is null)
             {
                 throw new BadHandler();
@@ -146,6 +160,7 @@ namespace DoloniToys.Application.Services.Common
         public bool RemoveProduct(string article)
         {
             Product product = _repositoryWrapper.ProductRepository.Items.FirstOrDefault(x => x.Article == article);
+                Console.WriteLine(article);
             if (product is not null)
             {
                 _repositoryWrapper.ProductRepository.Delete(product.Id);

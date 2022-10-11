@@ -51,9 +51,9 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpDelete(ProductPaths.Remove)]
-        public bool RemoveCategory([FromBody] string article)
+        public bool RemoveCategory([FromBody] RemoveProductRequest data)
         {
-            return _productService.RemoveProduct(article);
+            return _productService.RemoveProduct(data.Article);
         }
     }
 }

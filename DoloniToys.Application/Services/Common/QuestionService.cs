@@ -48,7 +48,7 @@ namespace DoloniToys.Application.Services.Common
         {
             PaginationResponse<QuestionDto> paginateProduct = Pagination.PaginateToDtos<Question, QuestionDto>(new PaginationParams<Question>()
             {
-                TData = _repositoryWrapper.QuestionRepository.Items,
+                TData = _repositoryWrapper.QuestionRepository.Items.OrderByDescending(f => f.Create),
                 CurrentPage = page,
                 Take = take,
             }, _mapper);
