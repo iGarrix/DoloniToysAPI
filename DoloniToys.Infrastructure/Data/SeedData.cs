@@ -22,7 +22,7 @@ namespace DoloniToys.Infrastructure.Data
                 try
                 {
                     var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-                    context.Database.Migrate();
+                    //context.Database.Migrate();
                     Init(scope);
                 }
                 catch (Exception ex)
