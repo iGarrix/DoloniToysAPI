@@ -10,8 +10,10 @@ namespace DoloniToys.Domain.Dtos.Common
     public class ProductDto : BaseDtoModel
     {
         public string Title { get; set; }
+        public string UaTitle { get; set; } = "";
         public List<string> Images { get; set; }
         public string Description { get; set; }
+        public string UaDescription { get; set; } = "";
         public int Rating { get; set; }
         public string Article { get; set; }
     }

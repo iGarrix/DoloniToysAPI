@@ -15,6 +15,7 @@ namespace DoloniToys.Application.MapProfiles.Common
         {
             CreateMap<Category, CategoryDto>()
                 .ForMember(dest => dest.Title, source => source.MapFrom(src => src.Title))
+                .ForMember(dest => dest.UaTitle, source => source.MapFrom(src => src.UaTitle))
                 .ForMember(dest => dest.Create, source => source.MapFrom(src => src.Create))
                 .ForMember(dest => dest.Image, source => source.MapFrom(src => src.Image));
         }

@@ -10,6 +10,7 @@ namespace DoloniToys.Domain.Models.DbModels
     public class Category : BaseDbModel<Guid>
     {
         public string Title { get; set; }
+        public string UaTitle { get; set; } = "";
         public string Image { get; set; }
         public virtual List<Product> Products { get; set; }
     }
