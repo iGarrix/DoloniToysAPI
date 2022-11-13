@@ -16,6 +16,7 @@ namespace DoloniToys.Domain.Models.DbModels
         public string UaDescription { get; set; } = "";
         public int Rating { get; set; }
         public string Article { get; set; }
+        public string Size { get; set; } = "";
         public virtual Category Category { get; set; }
     }
 }
