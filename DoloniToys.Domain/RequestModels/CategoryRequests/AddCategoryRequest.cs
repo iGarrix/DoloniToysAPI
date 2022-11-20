@@ -10,6 +10,8 @@ namespace DoloniToys.Domain.RequestModels.CategoryRequests
     public class AddCategoryRequest
     {
         public string Title { get; set; }
+        public string UaTitle { get; set; }
+        public int Rating { get; set; }
         public IFormFile Image { get; set; }
     }
 }

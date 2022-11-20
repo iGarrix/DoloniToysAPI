@@ -55,9 +55,12 @@ namespace DoloniToys.Application.Services.Common
             Product newProduct = new Product()
             {
                 Title = request.Title,
+                UaTitle = request.UaTitle,
+                UaDescription = request.UaDescription,
                 Description = request.Description,
                 Rating = request.Rating,    
                 Article = request.Article,
+                Size = request.Size,
                 Images = string.Join("/NEXT/", copyImages),
                 Category = category,
             };

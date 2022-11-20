@@ -10,10 +10,13 @@ namespace DoloniToys.Domain.RequestModels.ProductRequests
     public class AddProductRequest
     {
         public string Title { get; set; }
+        public string UaTitle { get; set; }
         public List<IFormFile> Images { get; set; }
         public string Description { get; set; }
+        public string UaDescription { get; set; }
         public int Rating { get; set; }
         public string Article { get; set; }
+        public string Size { get; set; }
         public string CategoryTitle { get; set; }
     }
 }

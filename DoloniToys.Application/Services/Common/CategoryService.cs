@@ -40,6 +40,8 @@ namespace DoloniToys.Application.Services.Common
             Category newCategory = new Category()
             {
                 Title = request.Title,
+                UaTitle = request.UaTitle,
+                Rating = request.Rating,
                 Image = copyImage,
             };
 
@@ -52,7 +54,7 @@ namespace DoloniToys.Application.Services.Common
         {
             PaginationResponse<CategoryDto> paginateCategory = Pagination.PaginateToDtos<Category, CategoryDto>(new PaginationParams<Category>()
             {
-                TData = _repositoryWrapper.CategoryRepository.Items.OrderByDescending(f => f.Create),
+                TData = _repositoryWrapper.CategoryRepository.Items.OrderByDescending(f => f.Rating),
                 CurrentPage = page,
                 Take = take,
             }, _mapper);
