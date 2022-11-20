@@ -28,6 +28,7 @@ namespace DoloniToys.Domain.Resources
         public const string Get = "GET_BY_ARTICLE";
         public const string GetFilter = "GET_PRODUCTS_BY_CATEGORY";
         public const string Change = "CHANGE_PRODUCT";
+        public const string ChangeImage = "CHANGE_IMAGE_PRODUCT";
         public const string Remove = "REMOVE_PRODUCT";
     }
 

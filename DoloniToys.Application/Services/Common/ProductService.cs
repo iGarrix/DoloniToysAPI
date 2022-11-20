@@ -69,6 +69,34 @@ namespace DoloniToys.Application.Services.Common
             return createdProduct.ToDto<Product, ProductDto>(_mapper);
         }
 
+        public ProductDto EditImage(EditImagesProductRequest request)
+        {
+            if (request is null)
+            {
+                throw new BadHandler();
+            }
+
+            Product findProduct = _repositoryWrapper.ProductRepository.Items.FirstOrDefault(x => x.Article == request.Article);
+            if (findProduct is null)
+            {
+                throw new NotFoundHandler();
+            }
+            try
+            {
+                ImageManager.RemoveImage(request.ImageKey, Path.Combine(ImagePaths.Root, ImagePaths.Product));
+                string newImageKey = ImageManager.CopyImage(request.NewImage, Path.Combine(ImagePaths.Root, ImagePaths.Product));
+                string newImages = findProduct.Images.Replace(request.ImageKey, newImageKey);
+                findProduct.Images = newImages;
+                _repositoryWrapper.ProductRepository.Change(findProduct);
+                return findProduct.ToDto<Product, ProductDto>(_mapper);
+            }
+            catch (Exception ex)
+            {
+                throw new BadHandler(ex.Message);
+            }
+            throw new BadHandler("Detected some problem");
+        }
+
         public PaginationResponse<ProductDto> GetAllProduct(int page = 1, int take = 1)
         {
             PaginationResponse<ProductDto> paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
@@ -151,7 +179,10 @@ namespace DoloniToys.Application.Services.Common
             if (product is not null)
             {
                 product.Title = request.NewTitle;
+                product.UaTitle = request.NewUaTitle;
                 product.Description = request.NewDescription;
+                product.UaDescription = request.NewUaDescription;
+                product.Size = request.NewSize;
                 product.Rating = request.NewRating;
                 product.Article = request.NewArticle;
                 _repositoryWrapper.ProductRepository.Change(product);
@@ -174,6 +205,6 @@ namespace DoloniToys.Application.Services.Common
                 return true;
             }
             throw new NotFoundHandler();
-        }
+        }      
     }
 }

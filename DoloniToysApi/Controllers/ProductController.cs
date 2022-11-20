@@ -26,6 +26,13 @@ namespace DoloniToysApi.Controllers
             return createdProduct;
         }
 
+        [HttpPut(ProductPaths.ChangeImage)]
+        public ProductDto EditImageInProduct([FromForm] EditImagesProductRequest request)
+        {
+            ProductDto updatedProduct = _productService.EditImage(request);
+            return updatedProduct;
+        }
+
         [HttpGet(ProductPaths.GetAll)]
         public PaginationResponse<ProductDto> GetAll(int page = 1, int take = 1)
         {
@@ -45,7 +52,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPut(ProductPaths.Change)]
-        public ProductDto ChangeCategory([FromForm] ChangeProductRequest request)
+        public ProductDto ChangeCategory([FromBody] ChangeProductRequest request)
         {
             return _productService.ChangeProduct(request);
         }
