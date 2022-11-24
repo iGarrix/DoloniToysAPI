@@ -3,6 +3,7 @@ using DoloniToys.Domain.Interfaces.Pagination.Common;
 using DoloniToys.Domain.Interfaces.Services;
 using DoloniToys.Domain.RequestModels.ProductRequests;
 using DoloniToys.Domain.Resources;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPost(ProductPaths.Add)]
+        [Authorize]
         public ProductDto AddProduct([FromForm] AddProductRequest request)
         {
             ProductDto createdProduct = _productService.AddProduct(request);
@@ -27,6 +29,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPut(ProductPaths.ChangeImage)]
+        [Authorize]
         public ProductDto EditImageInProduct([FromForm] EditImagesProductRequest request)
         {
             ProductDto updatedProduct = _productService.EditImage(request);
@@ -52,12 +55,14 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPut(ProductPaths.Change)]
+        [Authorize]
         public ProductDto ChangeCategory([FromBody] ChangeProductRequest request)
         {
             return _productService.ChangeProduct(request);
         }
 
         [HttpDelete(ProductPaths.Remove)]
+        [Authorize]
         public bool RemoveCategory([FromBody] RemoveProductRequest data)
         {
             return _productService.RemoveProduct(data.Article);

@@ -3,6 +3,7 @@ using DoloniToys.Domain.Interfaces.Pagination.Common;
 using DoloniToys.Domain.Interfaces.Services;
 using DoloniToys.Domain.RequestModels.QuestionRequests;
 using DoloniToys.Domain.Resources;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpGet(QuestionPaths.GetAll)]
+        [Authorize]
         public PaginationResponse<QuestionDto> GetAll(int page = 1, int take = 1)
         {
             return _questionService.GetAllQuestion(page, take);

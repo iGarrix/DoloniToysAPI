@@ -3,6 +3,7 @@ using DoloniToys.Domain.Interfaces.Pagination.Common;
 using DoloniToys.Domain.Interfaces.Services;
 using DoloniToys.Domain.RequestModels.CategoryRequests;
 using DoloniToys.Domain.Resources;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPost(CategoryPaths.Add)]
+        [Authorize]
         public CategoryDto AddCategory([FromForm] AddCategoryRequest request)
         {
             CategoryDto createdCategory = _categoryService.AddCategory(request);
@@ -33,12 +35,14 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpPut(CategoryPaths.Change)]
+        [Authorize]
         public CategoryDto ChangeCategory([FromForm] ChangeCategoryRequest request)
         {
             return _categoryService.ChangeCategory(request);
         }
 
         [HttpDelete(CategoryPaths.Remove)]
+        [Authorize]
         public bool RemoveCategory([FromBody]string title)
         {
             return _categoryService.RemoveCategory(title);
