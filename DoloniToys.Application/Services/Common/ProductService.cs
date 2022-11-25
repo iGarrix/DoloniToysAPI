@@ -97,6 +97,36 @@ namespace DoloniToys.Application.Services.Common
             throw new BadHandler("Detected some problem");
         }
 
+        public ProductDto AddImage(AddNewImageProductRequest request)
+        {
+            if (request is null)
+            {
+                throw new BadHandler();
+            }
+
+            Product findProduct = _repositoryWrapper.ProductRepository.Items.FirstOrDefault(x => x.Article == request.Article);
+            if (findProduct is null)
+            {
+                throw new NotFoundHandler();
+            }
+            try
+            {        
+                string newImageKey = ImageManager.CopyImage(request.NewImage, Path.Combine(ImagePaths.Root, ImagePaths.Product));
+                List<string> imageList = findProduct.Images.Split("/NEXT/", StringSplitOptions.None).ToList();
+                imageList.Add(newImageKey);
+                string newImages = string.Join("/NEXT/", imageList);
+                Console.WriteLine(newImages);
+                findProduct.Images = newImages;
+                _repositoryWrapper.ProductRepository.Change(findProduct);
+                return findProduct.ToDto<Product, ProductDto>(_mapper);
+            }
+            catch (Exception ex)
+            {
+                throw new BadHandler(ex.Message);
+            }
+            throw new BadHandler("Detected some problem");
+        }
+
         public PaginationResponse<ProductDto> GetAllProduct(int page = 1, int take = 1)
         {
             PaginationResponse<ProductDto> paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
@@ -118,7 +148,6 @@ namespace DoloniToys.Application.Services.Common
 
             return paginateProduct;
         }
-
 
         public ProductDto GetProduct(string article)
         {
@@ -205,6 +234,8 @@ namespace DoloniToys.Application.Services.Common
                 return true;
             }
             throw new NotFoundHandler();
-        }      
+        }
+
+        
     }
 }

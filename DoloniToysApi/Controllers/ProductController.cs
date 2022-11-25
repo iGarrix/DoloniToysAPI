@@ -36,6 +36,14 @@ namespace DoloniToysApi.Controllers
             return updatedProduct;
         }
 
+        [HttpPut(ProductPaths.AddImage)]
+        [Authorize]
+        public ProductDto AddImageInProduct([FromForm] AddNewImageProductRequest request)
+        {
+            ProductDto updatedProduct = _productService.AddImage(request);
+            return updatedProduct;
+        }
+
         [HttpGet(ProductPaths.GetAll)]
         public PaginationResponse<ProductDto> GetAll(int page = 1, int take = 1)
         {
