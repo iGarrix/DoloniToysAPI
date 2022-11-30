@@ -16,5 +16,6 @@ namespace DoloniToys.Domain.RequestModels.ProductRequests
         public int NewRating { get; set; }
         public string NewArticle { get; set; }
         public string NewSize { get; set; }
+        public string NewBoxSize { get; set; }
     }
 }

@@ -61,6 +61,7 @@ namespace DoloniToys.Application.Services.Common
                 Rating = request.Rating,    
                 Article = request.Article,
                 Size = request.Size,
+                BoxSize = request.BoxSize,
                 Images = string.Join("/NEXT/", copyImages),
                 Category = category,
             };
@@ -212,6 +213,7 @@ namespace DoloniToys.Application.Services.Common
                 product.Description = request.NewDescription;
                 product.UaDescription = request.NewUaDescription;
                 product.Size = request.NewSize;
+                product.BoxSize = request.NewBoxSize;
                 product.Rating = request.NewRating;
                 product.Article = request.NewArticle;
                 _repositoryWrapper.ProductRepository.Change(product);

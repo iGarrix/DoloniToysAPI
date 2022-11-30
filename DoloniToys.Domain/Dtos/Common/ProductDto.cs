@@ -16,6 +16,7 @@ namespace DoloniToys.Domain.Dtos.Common
         public string UaDescription { get; set; } = "";
         public int Rating { get; set; }
         public string Size { get; set; } = "";
+        public string BoxSize { get; set; }
         public string Article { get; set; }
     }
 }

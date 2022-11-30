@@ -17,6 +17,7 @@ namespace DoloniToys.Domain.RequestModels.ProductRequests
         public int Rating { get; set; }
         public string Article { get; set; }
         public string Size { get; set; }
+        public string BoxSize { get; set; }
         public string CategoryTitle { get; set; }
     }
 }

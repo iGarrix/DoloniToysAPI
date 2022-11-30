@@ -16,6 +16,7 @@ namespace DoloniToys.Application.MapProfiles.Common
             CreateMap<Product, ProductDto>()
                 .ForMember(dest => dest.Title, source => source.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Size, source => source.MapFrom(src => src.Size))
+                .ForMember(dest => dest.BoxSize, source => source.MapFrom(src => src.BoxSize))
                 .ForMember(dest => dest.UaTitle, source => source.MapFrom(src => src.UaTitle))
                 .ForMember(dest => dest.Create, source => source.MapFrom(src => src.Create))
                 .ForMember(dest => dest.Images, source => source.MapFrom(src => src.Images.Split("/NEXT/", StringSplitOptions.None).ToList()))
