@@ -34,6 +34,12 @@ namespace DoloniToysApi.Controllers
             return _categoryService.GetAllCategory(page, take);
         }
 
+        [HttpGet(CategoryPaths.Get)]
+        public CategoryDto GetCategory(string title)
+        {
+            return _categoryService.GetCategory(title);
+        }
+
         [HttpPut(CategoryPaths.Change)]
         [Authorize]
         public CategoryDto ChangeCategory([FromForm] ChangeCategoryRequest request)

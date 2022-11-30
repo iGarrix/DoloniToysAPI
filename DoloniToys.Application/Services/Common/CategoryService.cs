@@ -72,6 +72,17 @@ namespace DoloniToys.Application.Services.Common
             return paginateCategory;
         }
 
+        public CategoryDto GetCategory(string title)
+        {
+            var category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(f => f.Title == title);
+            if (category is null)
+            {
+                throw new NotFoundHandler();
+            }
+
+            return category.ToDto<Category, CategoryDto>(_mapper);
+        }
+
         public CategoryDto ChangeCategory(ChangeCategoryRequest request)
         {
             Category category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(x => x.Title == request.Title);
@@ -84,6 +95,8 @@ namespace DoloniToys.Application.Services.Common
                     category.Image = copyImage;
                 }
                 category.Title = request.NewTitle;
+                category.UaTitle = request.NewUaTitle;
+                category.Rating = request.NewRating;
                 _repositoryWrapper.CategoryRepository.Change(category);
                 return category.ToDto<Category, CategoryDto>(_mapper);
             }

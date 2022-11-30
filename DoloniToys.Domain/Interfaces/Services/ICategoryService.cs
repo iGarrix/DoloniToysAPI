@@ -13,6 +13,7 @@ namespace DoloniToys.Domain.Interfaces.Services
     {
         CategoryDto AddCategory(AddCategoryRequest request);
         PaginationResponse<CategoryDto> GetAllCategory(int page = 1, int take = 1);
+        CategoryDto GetCategory(string title);
         CategoryDto ChangeCategory(ChangeCategoryRequest request);
         bool RemoveCategory(string title);
     }

@@ -17,6 +17,7 @@ namespace DoloniToys.Domain.Resources
     {
         public const string Add = "ADD_CATEGORY";
         public const string GetAll = "GET_ALL";
+        public const string Get = "GET_CATEGORY";
         public const string Change = "CHANGE_CATEGORY";
         public const string Remove = "REMOVE_CATEGORY"; 
     }
