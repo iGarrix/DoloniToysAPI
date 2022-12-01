@@ -205,6 +205,7 @@ namespace DoloniToys.Application.Services.Common
 
         public ProductDto ChangeProduct(ChangeProductRequest request)
         {
+            Category category = _repositoryWrapper.CategoryRepository.Items.FirstOrDefault(f => f.Title == request.CategoryTitle);    
             Product product = _repositoryWrapper.ProductRepository.Items.FirstOrDefault(x => x.Article == request.Article);
             if (product is not null)
             {
@@ -216,6 +217,10 @@ namespace DoloniToys.Application.Services.Common
                 product.BoxSize = request.NewBoxSize;
                 product.Rating = request.NewRating;
                 product.Article = request.NewArticle;
+                if (category is not null)
+                {
+                    product.Category = category;
+                }
                 _repositoryWrapper.ProductRepository.Change(product);
                 return product.ToDto<Product, ProductDto>(_mapper);
             }
