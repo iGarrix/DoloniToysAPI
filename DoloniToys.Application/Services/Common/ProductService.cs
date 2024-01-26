@@ -152,7 +152,7 @@ namespace DoloniToys.Application.Services.Common
 
         public ProductDto GetProduct(string article)
         {
-            Product product = _repositoryWrapper.ProductRepository.Items.FirstOrDefault(x => x.Article == article);
+            Product product = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).FirstOrDefault(x => x.Article == article);
             if (product is not null)
             {
                 return product.ToDto<Product, ProductDto>(_mapper);
@@ -160,7 +160,7 @@ namespace DoloniToys.Application.Services.Common
             throw new NotFoundHandler();
         }
 
-        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "")
+        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "", bool isEco = false)
         {
 
             PaginationResponse<ProductDto> paginateProduct = default(PaginationResponse<ProductDto>);
@@ -168,7 +168,7 @@ namespace DoloniToys.Application.Services.Common
             {
                 paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
                 {
-                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).OrderByDescending(f => f.Create).Expression(filterParam),
+                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).SelectEco(isEco).OrderByDescending(f => f.Create).Expression(filterParam),
                     CurrentPage = page,
                     Take = take,
                 }, _mapper);
@@ -184,7 +184,7 @@ namespace DoloniToys.Application.Services.Common
 
                 paginateProduct = Pagination.PaginateToDtos<Product, ProductDto>(new PaginationParams<Product>()
                 {
-                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).Where(x => x.Category.Title == category.Title).OrderByDescending(f => f.Create).Expression(filterParam),
+                    TData = _repositoryWrapper.ProductRepository.Items.Include(x => x.Category).Where(x => x.Category.Title == category.Title).SelectEco(isEco).OrderByDescending(f => f.Create).Expression(filterParam),
                     CurrentPage = page,
                     Take = take,
                 }, _mapper);

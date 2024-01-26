@@ -57,9 +57,9 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpGet(ProductPaths.GetFilter)]
-        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, string filterParam, int page = 1, int take = 1)
+        public PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, string filterParam, int page = 1, int take = 1, bool isEco = false)
         {
-            return _productService.GetProductsByCategory(categoryTitle, page, take, filterParam);
+            return _productService.GetProductsByCategory(categoryTitle, page, take, filterParam, isEco);
         }
 
         [HttpPut(ProductPaths.Change)]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoloniToys.Application.Extensions.Expressions;
 using DoloniToys.Application.Extensions.Identity;
 using DoloniToys.Application.Extensions.Pagination;
 using DoloniToys.Application.Helpers.ImageManager;
@@ -10,6 +11,7 @@ using DoloniToys.Domain.Interfaces.Services;
 using DoloniToys.Domain.Models.DbModels;
 using DoloniToys.Domain.RequestModels.CategoryRequests;
 using DoloniToys.Domain.Resources;
+using DoloniToys.Infrastructure.Repositories.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,11 +52,11 @@ namespace DoloniToys.Application.Services.Common
             return createdCategory.ToDto<Category, CategoryDto>(_mapper);
         }
 
-        public PaginationResponse<CategoryDto> GetAllCategory(int page = 1, int take = 1)
+        public PaginationResponse<CategoryDto> GetAllCategory(int page = 1, int take = 1, string isEco = "standart")
         {
             PaginationResponse<CategoryDto> paginateCategory = Pagination.PaginateToDtos<Category, CategoryDto>(new PaginationParams<Category>()
             {
-                TData = _repositoryWrapper.CategoryRepository.Items.OrderByDescending(f => f.Rating),
+                TData = _repositoryWrapper.CategoryRepository.Items.OrderByDescending(f => f.Rating).SelectEco(isEco),
                 CurrentPage = page,
                 Take = take,
             }, _mapper);

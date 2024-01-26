@@ -23,7 +23,8 @@ namespace DoloniToys.Application.MapProfiles.Common
                 .ForMember(dest => dest.Description, source => source.MapFrom(src => src.Description))
                 .ForMember(dest => dest.UaDescription, source => source.MapFrom(src => src.UaDescription))
                 .ForMember(dest => dest.Rating, source => source.MapFrom(src => src.Rating))
-                .ForMember(dest => dest.Article, source => source.MapFrom(src => src.Article));
+                .ForMember(dest => dest.Article, source => source.MapFrom(src => src.Article))
+                .ForMember(dest => dest.CategoryTitle, source => source.MapFrom(src => src.Category.Title));
         }
     }
 }

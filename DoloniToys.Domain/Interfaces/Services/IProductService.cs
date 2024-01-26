@@ -16,7 +16,7 @@ namespace DoloniToys.Domain.Interfaces.Services
         ProductDto AddImage(AddNewImageProductRequest request);
         PaginationResponse<ProductDto> GetAllProduct(int page = 1, int take = 1);
         ProductDto GetProduct(string article);
-        PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "");
+        PaginationResponse<ProductDto> GetProductsByCategory(string categoryTitle, int page = 1, int take = 1, string filterParam = "", bool isEco = false);
         ProductDto ChangeProduct(ChangeProductRequest request);
         bool RemoveProduct(string article);
     }

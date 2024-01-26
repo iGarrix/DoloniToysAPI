@@ -34,5 +34,37 @@ namespace DoloniToys.Application.Extensions.Expressions
                     return list.OrderByDescending(x => x.Create);
             }
         }
+
+        public static IQueryable<Product> SelectEco(this IQueryable<Product> list, bool getEco)
+        {
+            if (getEco)
+            {
+                return list.Where(w => w.Article.ToLower().Contains("eco"));
+            }
+            return list.Where(w => !w.Article.ToLower().Contains("eco"));
+        }
+
+        public static IQueryable<Category> SelectEco(this IQueryable<Category> categories, string getEco = "standart")
+        {
+            if (getEco == "eco")
+            {
+                return categories.Where(w => w.Title.ToLower().Contains("eco"));
+            }
+            if (getEco == "standart")
+            {
+                return categories.Where(w => !w.Title.ToLower().Contains("eco"));
+            }
+            return categories;
+            //return categories.Select(x => new Category()
+            //{
+            //    Id = x.Id,
+            //    Create = x.Create,
+            //    Image = x.Image,
+            //    Products = x.Products,
+            //    Rating = x.Rating,
+            //    Title = "Eco " + x.Title,
+            //    UaTitle = "Еко " + x.UaTitle,
+            //});
+        }
     }
 }

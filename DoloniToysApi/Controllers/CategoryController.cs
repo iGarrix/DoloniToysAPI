@@ -29,9 +29,9 @@ namespace DoloniToysApi.Controllers
         }
 
         [HttpGet(CategoryPaths.GetAll)]
-        public PaginationResponse<CategoryDto> GetAll(int page = 1, int take = 1)
+        public PaginationResponse<CategoryDto> GetAll(int page = 1, int take = 1, string isEco = "standart")
         {
-            return _categoryService.GetAllCategory(page, take);
+            return _categoryService.GetAllCategory(page, take, isEco);
         }
 
         [HttpGet(CategoryPaths.Get)]
